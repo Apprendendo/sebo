@@ -1,0 +1,26 @@
+{% extends "layout/base.twig" %}
+
+{% block content %}
+    <h1>Nosso Acervo</h1>
+    <table>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Tipo</th>
+            <th>Preço</th>
+            <th>Ações</th>
+        </tr>
+        {% for produto in produtos %}
+            <tr>
+                <td>{{ produto.titulo }}</td>
+                <td>{{ produto.autor }}</td>
+                <td>{{ produto.tipo_nome }}</td>
+                <td>R$ {{ produto.preco|number_format(2, ',', '.') }}</td>
+                <td>
+                    <a href="{{ path('editar', {id: produto.id}) }}">Editar</a>
+                    <a href="{{ path('excluir', {id: produto.id}) }}">Excluir</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
