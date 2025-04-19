@@ -1,23 +1,51 @@
 <?php
+require_once __DIR__ . '/../models/ProdutoModel.php';
+
 class ProdutoController {
     private $model;
     private $twig;
-    
-    public function __construct($twig) {
-        $this->model = new Produto($database);
+
+    public function __construct($twig, $database) {
+        $this->model = new ProdutoModel($database);
         $this->twig = $twig;
     }
-    
+
     public function index() {
         $produtos = $this->model->listar();
-        echo $this->twig->render('produtos/index.twig', ['produtos' => $produtos]);
+        $tipos = $this->model->listarTipos(); // Você precisará implementar este método
+        echo $this->twig->render('produtos/index.twig', [
+            'produtos' => $produtos,
+            'tipos' => $tipos
+        ]);
     }
-    
+
     public function criar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Validação dos dados
-            // Chamada do modelo
+            $this->model->criar($_POST);
+            header("Location: /produtos");
+            exit;
         }
-        echo $this->twig->render('produtos/criar.twig');
+        $tipos = $this->model->listarTipos();
+        echo $this->twig->render('produtos/criar.twig', ['tipos' => $tipos]);
+    }
+
+    public function editar($id) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->model->atualizar($id, $_POST);
+            header("Location: /produtos");
+            exit;
+        }
+        $produto = $this->model->buscarPorId($id);
+        $tipos = $this->model->listarTipos();
+        echo $this->twig->render('produtos/editar.twig', [
+            'produto' => $produto,
+            'tipos' => $tipos
+        ]);
+    }
+
+    public function excluir($id) {
+        $this->model->excluir($id);
+        header("Location: /produtos");
+        exit;
     }
 }
