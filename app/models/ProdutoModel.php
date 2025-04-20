@@ -69,4 +69,12 @@ class ProdutoModel {
         $stmt = $this->db->prepare("DELETE FROM produtos WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
+
+    public function listarTipos() {
+        // Example implementation for listing types
+        $query = "SELECT * FROM tipos_produto";
+        $statement = $this->db->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
