@@ -6,7 +6,6 @@ $port = 3307;
 $dbname = 'if0_38511592_app_sebo';
 $username = 'root';
 $password = '123';
-$password = '123';
 
 try {
     $pdo = new PDO(
