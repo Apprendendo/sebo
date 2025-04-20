@@ -3,29 +3,26 @@
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/twig.php';
 require_once __DIR__ . '/../app/controllers/ProdutoController.php';
+require_once __DIR__ . '/../app/controllers/TipoController.php';
 
-$pdo = conectarBanco();
+// Configuração do banco de dados
+$db = new Database();
+$pdo = $db->conectar();
+
+// Configuração do Twig
 $twig = carregarTwig();
 
-$controller = new ProdutoController($twig, $pdo);
+// Rotas para Produtos
+$produtoController = new ProdutoController($twig, $pdo);
+// Rotas para Tipos
+$tipoController = new TipoController($twig, $pdo);
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-switch ($path) {
-    case '/produtos':
-        $controller->index();
-        break;
-    case '/produtos/criar':
-        $controller->criar();
-        break;
-    case (preg_match('/\/produtos\/editar\/(\d+)/', $path, $matches) ? true : false):
-        $controller->editar($matches[1]);
-        break;
-    case (preg_match('/\/produtos\/excluir\/(\d+)/', $path, $matches) ? true : false):
-        $controller->excluir($matches[1]);
-        break;
-    default:
-        http_response_code(404);
-        echo 'Página não encontrada';
-        break;
+// Remover o prefixo "/sebo/public/"
+$basePath = '/sebo/public';
+if (strpos($path, $basePath) === 0) {
+    $path = substr($path, strlen($basePath));
 }
+
+include_once __DIR__ . '/../routes/web.php';
