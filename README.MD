@@ -88,7 +88,7 @@ No arquivo de configuração do Apache, adicione:
 
 ``` htaccess
 <VirtualHost *:80>
-    ServerName sebo-online.com
+    ServerName sebo.com
     DocumentRoot "/caminho/para/o/projeto/public"
 
     <Directory "/caminho/para/o/projeto/public">
