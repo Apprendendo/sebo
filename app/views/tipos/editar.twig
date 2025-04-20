@@ -1,0 +1,15 @@
+{% extends 'layout/base.twig' %}
+
+{% block title %}Editar Tipo - Sebo Online{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Editar Tipo de Produto</h1>
+    <form method="POST">
+        <input type="hidden" name="id" value="{{ tipo.id }}">
+        <div class="mb-3">
+            <label class="form-label">Nome do Tipo</label>
+            <input type="text" name="nome" class="form-control" value="{{ tipo.nome }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+    </form>
+{% endblock %}

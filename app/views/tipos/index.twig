@@ -1,0 +1,30 @@
+{% extends 'layout/base.twig' %}
+
+{% block title %}Tipos de Produto - Sebo Online{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Tipos de Produto</h1>
+    <a href="/tipos/criar" class="btn btn-primary mb-3">Novo Tipo</a>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tipo in tipos %}
+            <tr>
+                <td>{{ tipo.id }}</td>
+                <td>{{ tipo.nome }}</td>
+                <td>
+                    <a href="/tipos/editar/{{ tipo.id }}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="/tipos/excluir/{{ tipo.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza?')">Excluir</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
