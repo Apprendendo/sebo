@@ -67,7 +67,7 @@ composer install
 - Inicie o Apache e o MySQL pelo painel do XAMPP.
 - Acesse o projeto no navegador: ```http://localhost/sebo/public/```
 
-**Com Laragon:*`
+**Com Laragon:**
 
 - Coloque o projeto no diretório www do Laragon:
 ```C:\laragon\www\sebo```
@@ -105,6 +105,7 @@ No arquivo de configuração do Apache, adicione:
 - Atualize as credenciais no arquivo config/database.php para refletir o ambiente de produção.
 
 3. Configurar permissões
+
 - Certifique-se de que o servidor tenha permissão para gravar no diretório cache: ```chmod -R 755 cache```
 
 ---
