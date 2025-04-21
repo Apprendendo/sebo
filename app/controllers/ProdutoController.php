@@ -32,12 +32,12 @@ class ProdutoController {
     public function editar($id) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->model->atualizar($id, $_POST);
-            header("Location: /produtos");
+            header("Location: /sebo/public/produtos");
             exit;
         }
         $produto = $this->model->buscarPorId($id);
         $tipos = $this->model->listarTipos();
-        echo $this->twig->render('produtos/editar.twig', [
+        echo $this->twig->render('/produtos/editar.twig', [
             'produto' => $produto,
             'tipos' => $tipos
         ]);
@@ -45,7 +45,7 @@ class ProdutoController {
 
     public function excluir($id) {
         $this->model->excluir($id);
-        header("Location: /produtos");
+        header("Location: /sebo/public/produtos");
         exit;
     }
 }

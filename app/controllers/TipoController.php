@@ -19,7 +19,7 @@ class TipoController {
     public function criar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->model->salvar($_POST);
-            header("Location: /tipos");
+            header("Location: /sebo/public/tipos");
             exit;
         }
         echo $this->twig->render('tipos/criar.twig');
@@ -29,7 +29,7 @@ class TipoController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['id'] = $id;
             $this->model->salvar($_POST);
-            header("Location: /tipos");
+            header("Location: /sebo/public/tipos");
             exit;
         }
         $tipo = $this->model->buscarPorId($id);
@@ -38,7 +38,7 @@ class TipoController {
 
     public function excluir($id) {
         $this->model->excluir($id);
-        header("Location: /tipos");
+        header("Location: /sebo/public/tipos");
         exit;
     }
 }

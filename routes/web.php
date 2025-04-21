@@ -38,6 +38,10 @@ switch ($path) {
         http_response_code(404);
         echo 'Página não encontrada';
         break;
+    case '/500':
+        http_response_code(500);
+        echo 'Erro interno do servidor';
+        break;
     default:
         echo $twig->render('index.twig', []); // Renderiza a página inicial
         break;

@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1 class="mb-4">Produtos</h1>
-    <a href="./produtos/criar" class="btn btn-primary mb-3">Novo Produto</a>
+    <a href="/sebo/public/produtos/criar" class="btn btn-primary mb-3">Novo Produto</a>
     
     <table class="table table-striped">
     <thead>
@@ -28,7 +28,8 @@
             <td>{{ produto.estado }}</td>
             <td>R$ {{ produto.preco|number_format(2, ',', '.') }}</td>
             <td>
-                <!-- Ações permanecem iguais -->
+                <a href="/sebo/public/produtos/editar/{{ produto.id }}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="/sebo/public/produtos/excluir/{{ produto.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza?')">Excluir</a>
             </td>
         </tr>
         {% endfor %}

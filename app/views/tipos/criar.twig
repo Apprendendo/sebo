@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1 class="mb-4">Novo Tipo de Produto</h1>
-    <form method="POST">
+    <form action="/tipos/criar"  method="POST">
         <div class="mb-3">
             <label class="form-label">Nome do Tipo</label>
             <input type="text" name="nome" class="form-control" required>
