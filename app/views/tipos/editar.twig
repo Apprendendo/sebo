@@ -5,11 +5,13 @@
 {% block content %}
     <h1 class="mb-4">Editar Tipo de Produto</h1>
     <form action="/sebo/public/tipos/editar/{{ tipo.id }}" method="POST">
-        <input type="hidden" name="id" value="{{ tipo.id }}">
-        <div class="mb-3">
-            <label class="form-label">Nome do Tipo</label>
-            <input type="text" name="nome" class="form-control" value="{{ tipo.nome }}" required>
+        <div class="field">
+            <label class="label">Nome do Tipo</label>
+            <div class="control">
+                <input class="input" type="text" name="nome" placeholder="Nome do Tipo" value="{{ tipo.nome }}" required>
+            </div>
+            <p class="help">Se tiver dúvidas, procure pela <strong><a href="/sebo/public/tipos">lista</a></strong> se já existe um.</p>
         </div>
-        <button type="submit" class="btn btn-primary">Atualizar</button>
+        <button type="submit" class="button is-success">Atualizar</button>
     </form>
 {% endblock %}

@@ -1,43 +1,65 @@
 {% extends 'layout/base.twig' %}
 
-{% block title %}Editar Produto{% endblock %}
+{% block page_title %}Sebo Online{% endblock %}
+{% block page_subtitle%}Edição de Produtos{% endblock %}
+{% block alert%}Preencha o formulário para atualizar. {%endblock%}
 
 {% block content %}
     <h1>Editar Produto</h1>
     <form action="/sebo/public/produtos/editar/{{ produto.id }}" method="POST">
-        <div class="mb-3">
-            <label for="titulo" class="form-label">Título</label>
-            <input type="text" class="form-control" id="titulo" name="titulo" value="{{ produto.titulo }}" required>
+        <div class="field">
+            <label class="label">Tipo de Produto</label>
+            <div class="select">
+                <select name="tipo_id" class="form-select" required>
+                    {% for tipo in tipos %}
+                        <option value="{{ tipo.id }}" {% if tipo.id == produto.tipo_id %}selected{% endif %}>
+                            {{ tipo.nome }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="autor" class="form-label">Autor</label>
-            <input type="text" class="form-control" id="autor" name="autor" value="{{ produto.autor }}" required>
+        <div class="field">
+            <label class="label">Titulo</label>
+            <div class="control">
+                <input class="input" type="text" name="titulo" placeholder="Título" value="{{produto.titulo}}" required>
+            </div>
+            <p class="help">Se tiver dúvidas, procure pela <strong><a href="/sebo/public/produtos">lista</a></strong> se já existe um.</p>
         </div>
-        <div class="mb-3">
-            <label for="ano_publicacao" class="form-label">Ano de Publicação</label>
-            <input type="number" class="form-control" id="ano_publicacao" name="ano_publicacao" value="{{ produto.ano_publicacao }}" required>
+       <div class="field">
+            <label class="label">Autor</label>
+            <div class="control">
+                <input class="input" type="text" name="autor" value="{{ produto.autor }}" required>
+            </div>
+            <p class="help">Se tiver dúvidas, procure pela <strong><a href="/sebo/public/produtos">lista</a></strong> se já existe um.</p>
         </div>
-        <div class="mb-3">
-            <label for="tipo_id" class="form-label">Tipo</label>
-            <select class="form-select" id="tipo_id" name="tipo_id" required>
-                {% for tipo in tipos %}
-                    <option value="{{ tipo.id }}" {% if tipo.id == produto.tipo_id %}selected{% endif %}>
-                        {{ tipo.nome }}
-                    </option>
-                {% endfor %}
-            </select>
+        <div class="field">
+            <label class="label">Ano de Publicação</label>
+            <div class="control">
+                <input class="input" type="number" name="ano_publicacao" value="{{ produto.ano_publicacao }}" required>
+            </div>
+            <p class="help">Informe um ano válido.</p>
         </div>
-        <div class="mb-3">
-            <label for="estado" class="form-label">Estado</label>
-            <select class="form-select" id="estado" name="estado" required>
-                <option value="Novo" {% if produto.estado == 'Novo' %}selected{% endif %}>Novo</option>
-                <option value="Usado" {% if produto.estado == 'Usado' %}selected{% endif %}>Usado</option>
-            </select>
+        <div class="field">
+            <label class="label">Condição de Produto</label>
+            <div class="select">
+                <select name="tipo_id" class="form-select" required>
+                    <option value="1" {% if produto.estado == 'Novo' %}selected{% endif %}>Novo</option>
+                    <option value="2" {% if produto.estado == 'Usado - Como novo' %}selected{% endif %}>Usado - Como novo</option>
+                    <option value="3" {% if produto.estado == 'Usado - Bom estado' %}selected{% endif %}>Usado - Bom estado</option>
+                    <option value="4" {% if produto.estado == 'Usado - Desgastado' %}selected{% endif %}>Usado - Desgastado</option>
+                </select>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="preco" class="form-label">Preço</label>
-            <input type="text" class="form-control" id="preco" name="preco" value="{{ produto.preco }}" required>
+        <div class="field">
+            <label class="label">Preço</label>
+            <div class="control">
+                <input class="input" step="0.01" type="number" name="preco" value="{{ produto.preco }}" required>
+            </div>
+            <p class="help">Informe um valor, se possível, com casas decimais.</p>
         </div>
-        <button type="submit" class="btn btn-primary">Salvar</button>
+        
+        <br/>
+        <button type="submit" class="button is-success">Atualizar</button>
     </form>
 {% endblock %}

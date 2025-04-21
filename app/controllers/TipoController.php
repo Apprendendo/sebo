@@ -11,16 +11,26 @@ class TipoController {
         $this->twig = $twig;
     }
 
+    private function redirecionar(){
+        $referer = '/sebo/public/tipos' ?? $_SERVER['HTTP_REFERER'];
+        header("Location: $referer");
+        exit;
+    }
+
+    private function render($url){
+        return $this->twig->render($url, [
+            'tipos' => $this->model->listarTodos()]
+        );
+    }
+
     public function index() {
-        $tipos = $this->model->listarTodos();
-        echo $this->twig->render('tipos/index.twig', ['tipos' => $tipos]);
+        echo $this->render('tipos/index.twig');
     }
 
     public function criar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->model->salvar($_POST);
-            header("Location: /sebo/public/tipos");
-            exit;
+            $this->redirecionar();
         }
         echo $this->twig->render('tipos/criar.twig');
     }
@@ -29,8 +39,7 @@ class TipoController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['id'] = $id;
             $this->model->salvar($_POST);
-            header("Location: /sebo/public/tipos");
-            exit;
+            $this->redirecionar();
         }
         $tipo = $this->model->buscarPorId($id);
         echo $this->twig->render('tipos/editar.twig', ['tipo' => $tipo]);
@@ -38,7 +47,6 @@ class TipoController {
 
     public function excluir($id) {
         $this->model->excluir($id);
-        header("Location: /sebo/public/tipos");
-        exit;
+        $this->redirecionar();
     }
 }

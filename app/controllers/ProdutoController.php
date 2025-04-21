@@ -10,10 +10,20 @@ class ProdutoController {
         $this->twig = $twig;
     }
 
+    private function redirecionar(){
+        $referer = '/sebo/public/produtos' ?? $_SERVER['HTTP_REFERER'];
+        header("Location: $referer");
+        exit;
+    }
+
+    private function render($url, $data = []) {
+        echo $this->twig->render($url, $data);
+    }
+
     public function index() {
         $produtos = $this->model->listar();
         $tipos = $this->model->listarTipos(); // Você precisará implementar este método
-        echo $this->twig->render('produtos/index.twig', [
+        $this->render('produtos/index.twig', [
             'produtos' => $produtos,
             'tipos' => $tipos
         ]);
@@ -21,23 +31,34 @@ class ProdutoController {
 
     public function criar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Validar e salvar os dados do produto
             $this->model->criar($_POST);
-            header("Location: /produtos");
-            exit;
+
+            // Redirecionar para a lista de produtos
+            $this->redirecionar();
         }
+
+        // Renderizar o formulário de criação
+        // Obter a lista de tipos para o formulário
         $tipos = $this->model->listarTipos();
-        echo $this->twig->render('produtos/criar.twig', ['tipos' => $tipos]);
+        $this->render('produtos/criar.twig', [
+            'tipos' => $tipos
+        ]);
     }
 
     public function editar($id) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->model->atualizar($id, $_POST);
-            header("Location: /sebo/public/produtos");
-            exit;
+            $this->redirecionar();
         }
+
+        // Renderizar o formulário de edição
+        // Obter o produto a ser editado
         $produto = $this->model->buscarPorId($id);
+
+        // Obter a lista de tipos para o formulário
         $tipos = $this->model->listarTipos();
-        echo $this->twig->render('/produtos/editar.twig', [
+        $this->render('produtos/editar.twig', [
             'produto' => $produto,
             'tipos' => $tipos
         ]);
@@ -45,7 +66,6 @@ class ProdutoController {
 
     public function excluir($id) {
         $this->model->excluir($id);
-        header("Location: /sebo/public/produtos");
-        exit;
+        $this->redirecionar();
     }
 }
