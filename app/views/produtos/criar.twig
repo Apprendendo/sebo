@@ -1,9 +1,10 @@
 {% extends 'layout/base.twig' %}
 
-{% block title %}Novo Produto - Sebo Online{% endblock %}
+{% block page_title %}Novo Produto - Sebo Online{% endblock %}
+{% block page_subtitle %}Cadastro de novo produto{% endblock %}
 
 {% block content %}
-    <h1 class="mb-4">Novo Produto</h1>
+    <h1 class="title">Novo Produto</h1>
     <form action="/sebo/public/produtos/criar" method="POST">
     <div class="mb-3">
         <label>Tipo de Produto</label>

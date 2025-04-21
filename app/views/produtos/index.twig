@@ -1,38 +1,48 @@
 {% extends 'layout/base.twig' %}
 
-{% block title %}Produtos - Sebo Online{% endblock %}
+{% block page_title %}Sebo Online{% endblock %}
+{% block page_subtitle%}Lista de Produtos{% endblock %}
+{% block alert%}Descubra se há o produto disponível ou cadastre. {%endblock%}
 
 {% block content %}
-    <h1 class="mb-4">Produtos</h1>
-    <a href="/sebo/public/produtos/criar" class="btn btn-primary mb-3">Novo Produto</a>
-    
-    <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Título</th>
-            <th>Autor</th>
-            <th>Ano</th>
-            <th>Tipo</th>
-            <th>Estado</th>
-            <th>Preço</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for produto in produtos %}
-        <tr>
-            <td>{{ produto.titulo }}</td>
-            <td>{{ produto.autor }}</td>
-            <td>{{ produto.ano_publicacao }}</td>
-            <td>{{ produto.tipo_nome }}</td>
-            <td>{{ produto.estado }}</td>
-            <td>R$ {{ produto.preco|number_format(2, ',', '.') }}</td>
-            <td>
-                <a href="/sebo/public/produtos/editar/{{ produto.id }}" class="btn btn-sm btn-warning">Editar</a>
-                <a href="/sebo/public/produtos/excluir/{{ produto.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza?')">Excluir</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <h1 class="mb-4">Produtos Cadastrados</h1>
+    <a href="/sebo/public/produtos/criar" class="button is-link">Novo Produto</a>
+</div>
+<div class="content">
+    {% if produtos|length > 0 %}
+        <table class="table is-striped is-fullwidth">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Ano</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                    <th>Preço</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto in produtos %}
+                <tr>
+                    <td>{{ produto.titulo }}</td>
+                    <td>{{ produto.autor }}</td>
+                    <td>{{ produto.ano_publicacao }}</td>
+                    <td>{{ produto.tipo_nome }}</td>
+                    <td>{{ produto.estado }}</td>
+                    <td>R$ {{ produto.preco|number_format(2, ',', '.') }}</td>
+                    <td>
+                        <a href="/sebo/public/produtos/editar/{{ produto.id }}" class="button is-small is-warning">Editar</a>
+                        <a href="/sebo/public/produtos/excluir/{{ produto.id }}" class="button is-small is-danger" onclick="return confirm('Tem certeza?')">Excluir</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="notification is-warning">
+            Nenhum produto cadastrado no momento. Clique em "Novo Produto" para adicionar um.
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

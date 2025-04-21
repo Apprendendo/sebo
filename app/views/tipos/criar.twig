@@ -1,14 +1,19 @@
 {% extends 'layout/base.twig' %}
 
-{% block title %}Novo Tipo - Sebo Online{% endblock %}
+{% block page_title %}Sebo Online{% endblock %}
+{% block page_subtitle%}Tipos de Produtos{% endblock %}
+{% block alert%}Preencha o formulário para cadastrar. {%endblock%}
 
 {% block content %}
     <h1 class="mb-4">Novo Tipo de Produto</h1>
-    <form action="/tipos/criar"  method="POST">
-        <div class="mb-3">
-            <label class="form-label">Nome do Tipo</label>
-            <input type="text" name="nome" class="form-control" required>
+    <form action="/sebo/public/tipos/criar"  method="POST">
+        <div class="field">
+            <label class="label">Nome</label>
+            <div class="control">
+                <input class="input" type="text" name="nome" placeholder="Nome do Tipo" required>
+            </div>
+            <p class="help">Se tiver dúvidas, procure pela lista se já existe um.</p>
         </div>
-        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="submit" class="button is-success">Salvar</button>
     </form>
 {% endblock %}

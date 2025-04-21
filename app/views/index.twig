@@ -1,10 +1,12 @@
 {% extends 'layout/base.twig' %}
 
-{% block title %}Página Inicial - Sebo Online{% endblock %}
+{% block page_title %}Sebo Online{% endblock %}
+{% block page_subtitle%}Página Inicial{% endblock %}
+{% block alert%}Explore nossa coleção de livros usados e encontre o que você procura.{%endblock%}
 
 {% block content %}
     <h1>Bem-vindo ao Sebo Online!</h1>
-    <p>Explore nossa coleção de livros usados e encontre o que você procura.</p>
-    <a href="/sebo/public/produtos" class="btn btn-primary">Ver Produtos</a>
-    <a href="/sebo/public/tipos" class="btn btn-primary">Ver Tipos de Produtos</a>
+    <p></p>
+    <a href="/sebo/public/produtos" class="button is-link">Ver Produtos</a>
+    <a href="/sebo/public/tipos" class="button is-link">Ver Tipos de Produtos</a>
 {% endblock %}
