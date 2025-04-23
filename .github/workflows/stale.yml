@@ -1,0 +1,29 @@
+# Este fluxo de trabalho alerta e, em seguida, fecha problemas e PRs que não tiveram atividade por um período de tempo especificado.
+#
+# Você pode ajustar o comportamento modificando este arquivo.
+# Para mais informações, consulte:
+# https://github.com/actions/stale
+
+name: Marcar problemas e pull requests obsoletos
+
+on:
+  schedule:
+    - cron: '15 8 * * *'
+
+jobs:
+  stale:
+
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    
+    steps:
+      - uses: actions/stale@v5
+      
+        with:
+          repo-token: ${{secrets.GITHUB_TOKEN}}
+          stale-issue-message: 'Mensagem de problema obsoleto'
+          stale-pr-message: 'Mensagem de pull request obsoleto'
+          stale-issue-label: 'no-issue-activity'
+          stale-pr-label: 'no-pr-activity'
