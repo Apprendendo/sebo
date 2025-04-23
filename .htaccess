@@ -1,0 +1,12 @@
+# Ativar o mecanismo de reescrita
+RewriteEngine On
+
+# Definir o diretório base (ajuste conforme necessário)
+RewriteBase /SEBO/public/
+
+# Ignorar arquivos e diretórios existentes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirecionar todas as requisições para o index.php
+RewriteRule ^(.*)$ index.php [QSA,L]
