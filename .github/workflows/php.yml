@@ -27,6 +27,11 @@ jobs:
           - name: Build Twig Files
             run: php ./config/twig.php
 
+          - name: Debug Git State
+            run: |
+              git status
+              git remote -v
+
           - name: Deploy to GitHub Pages
             uses: peaceiris/actions-gh-pages@v3
             with:
