@@ -21,6 +21,9 @@ jobs:
           - name: Install Composer Dependencies
             run: composer install --no-dev --prefer-dist
 
+          - name: Verify Vendor Directory
+            run: ls -la vendor
+
           - name: Build Twig Files
             run: php ./config/twig.php
 
