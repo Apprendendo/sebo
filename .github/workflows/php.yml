@@ -22,7 +22,7 @@ jobs:
             run: composer install --no-dev --prefer-dist
 
           - name: Build Twig Files
-            run: php path/to/your/twig/build/script.php
+            run: php ./config/twig.php
 
           - name: Deploy to GitHub Pages
             uses: peaceiris/actions-gh-pages@v3
