@@ -54,9 +54,27 @@ class UsuarioController {
         $this->verificar($usuario,  'Usuário encontrado com sucesso', 'Usuário não encontrado');
     }
 
+    public function login() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['email'];
+            $senha = $_POST['senha'];
+            $this->efetuarLogin($email, $senha);
+        } else {
+            echo $this->twig->render('login.twig');
+        }
+    }
+
     // Login user
-    public function login($email, $senha) {
+    public function efetuarLogin($email, $senha) {
         $usuario = $this->model->validarSenha($email, $senha);
         $this->verificar($usuario, 'Login realizado com sucesso', 'Email ou senha inválidos', 'index.twig', 'error.twig');
+    }
+
+    // Logout user
+    public function logout() {
+        session_start();
+        session_destroy();
+        header('Location: /sebo/public/login');
+        exit;
     }
 }
