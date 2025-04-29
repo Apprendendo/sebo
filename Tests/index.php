@@ -1,24 +1,24 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use Tests\Config\Database;
+
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-use App\Controllers\ProdutoController;
-use App\Controllers\TipoController;
-use App\Controllers\UsuarioController;
-use App\Config\Database;
-use App\Config\Twig;
-
 // Configuração do banco de dados
 $db = new Database();
 $pdo = $db->conectar();
+var_dump($pdo); // Verificar se o objeto PDO foi criado
 
 // Configuração do Twig
 $twigConfig = new Twig();
 $twig = $twigConfig->carregarTwig();
 
+// Renderizar a página inicial
+echo $twig->render('index.twig', ['title' => 'Sebo Online']);
 
 // Configuração de rotas
 $produtoController = new ProdutoController($twig, $pdo);
@@ -32,5 +32,7 @@ $basePath = '/sebo/public';
 if (strpos($path, $basePath) === 0) {
     $path = substr($path, strlen($basePath));
 }
+
+var_dump($path); // Verificar o valor de $path
 
 include_once __DIR__ . '/../routes/web.php';

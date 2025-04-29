@@ -1,0 +1,42 @@
+{% extends 'layout/base.twig' %}
+
+{% block page_title %}Sebo Online{% endblock %}
+{% block page_subtitle%}Lista de Usuarios{% endblock %}
+{% block alert%}Descubra se há o usuário cadastrado ou não. {%endblock%}
+
+{% block content %}
+    <h1 class="mb-4">Usuarios Cadastrados</h1>
+    <a href="/sebo/public/usuarios/criar" class="button is-link">Novo Usuário</a>
+</div>
+<div class="content">
+    {% if usuarios|length > 0 %}
+        <table class="table is-striped is-fullwidth">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.nome }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>
+                        <a href="/sebo/public/usuarios/editar/{{ usuario.id }}" class="button is-small is-warning">Editar</a>
+                        <a href="/sebo/public/usuarios/excluir/{{ usuario.id }}" class="button is-small is-danger" onclick="return confirm('Tem certeza?')">Excluir</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="notification is-warning">
+            Nenhum usuário cadastrado no momento. Clique em "Novo Usuário" para adicionar um.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "layouts/base.twig" %}
+
+{% block title %}Editar Usuário{% endblock %}
+
+{% block content %}
+<h1>Editar Usuário</h1>
+
+<form action="{{ path_for('usuarios.update', { id: usuario.id }) }}" method="POST">
+    <input type="hidden" name="_METHOD" value="PUT">
+
+    <div>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" value="{{ usuario.nome }}" required>
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ usuario.email }}" required>
+    </div>
+
+    <div>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha">
+        <small>Deixe em branco para manter a senha atual</small>
+    </div>
+
+    <button type="submit">Salvar Alterações</button>
+</form>
+
+<a href="{{ path_for('usuarios.index') }}">Voltar</a>
+{% endblock %}

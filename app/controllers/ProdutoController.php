@@ -1,5 +1,7 @@
 <?php
-require_once __DIR__ . '/../models/ProdutoModel.php';
+namespace App\Controllers;
+
+use App\Models\ProdutoModel;
 
 class ProdutoController {
     private $model;

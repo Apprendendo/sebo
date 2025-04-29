@@ -1,7 +1,7 @@
 <?php
-// app/controllers/TipoController.php
-require_once __DIR__ . '/../models/TipoModel.php';
+namespace App\Controllers;
 
+use App\Models\TipoModel;
 class TipoController {
     private $model;
     private $twig;
