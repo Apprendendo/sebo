@@ -25,7 +25,7 @@ jobs:
             run: ls -la vendor
 
           - name: Build Twig Files
-            run: php ./Config/Twig.php
+            run: php ./App/Config/Twig.php
 
           - name: Debug Git State
             run: |
