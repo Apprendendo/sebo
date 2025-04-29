@@ -12,6 +12,12 @@ class UsuarioController {
         $this->twig = $twig;
     }
 
+    private function redirecionar(){
+        $referer = '/sebo/public/usuarios' ?? $_SERVER['HTTP_REFERER'];
+        header("Location: $referer");
+        exit;
+    }
+
     // List all users
     public function index() {
         $usuarios = $this->model->listarTodos();
