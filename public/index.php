@@ -5,11 +5,13 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+use Tests\Config\Database;
+use App\Config\Twig;
+use Routes\Web;
+
 use App\Controllers\ProdutoController;
 use App\Controllers\TipoController;
 use App\Controllers\UsuarioController;
-use App\Config\Database;
-use App\Config\Twig;
 
 // Configuração do banco de dados
 $db = new Database();
@@ -21,9 +23,12 @@ $twig = $twigConfig->carregarTwig();
 
 
 // Configuração de rotas
-$produtoController = new ProdutoController($twig, $pdo);
-$tipoController = new TipoController($twig, $pdo);
-$usuarioController = new UsuarioController($twig, $pdo);
+$controllers = [
+    'produto' => new ProdutoController($twig, $pdo),
+    'tipo' => new TipoController($twig, $pdo),
+    'usuario' => new UsuarioController($twig, $pdo)
+];
+
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -33,4 +38,5 @@ if (strpos($path, $basePath) === 0) {
     $path = substr($path, strlen($basePath));
 }
 
-include_once __DIR__ . '/../routes/web.php';
+// Verificar se a rota existe e chamar o controlador correspondente
+$web = new Web($path, $twig, $controllers);

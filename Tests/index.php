@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 // Configuração do banco de dados
 $db = new Database();
 $pdo = $db->conectar();
-var_dump($pdo); // Verificar se o objeto PDO foi criado
+
 
 // Configuração do Twig
 $twigConfig = new Twig();
