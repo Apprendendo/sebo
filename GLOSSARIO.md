@@ -20,3 +20,12 @@ Aqui, informo que usarei as bibliotecas padrões de conexão. O PDO (sigla para 
 6. Em Model/Produto: As operações de CRUD são preparadas através de funções que interagirão com a Base de Dados, mas sua ação só pode ser efetiva mediante um chamado do Controller (ou seja, requer a nossa ação na View).
 
 7. Em Controller/Produto: Ele receberá o Model correspondente como parametro para a realização das operações CRUD e a preparação para a view após a mesma.
+
+Fontes e onde estudar mais sobre PHP:
+
+- [MZN - Mozilla](https://developer.mozilla.org/pt-BR/docs/Glossary/PHP)
+
+- [PHP](https://www.php.net/manual/pt_BR/language.oop5.php)
+    
+    - Ler de Operadores a Namespaces
+    - Trazer duvidas para a professora ao longo das aulas
