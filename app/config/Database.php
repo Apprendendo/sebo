@@ -1,4 +1,8 @@
 <?php
+
+/** Informo aqui a configuração relacionada
+ *  a conexão a Base de Dados, em PHP 
+ * */
 namespace App\Config;
 
 use PDO;

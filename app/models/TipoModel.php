@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Models;
 use PDO;
-// app/models/TipoModel.php
+
 class TipoModel {
     private $pdo;
 
